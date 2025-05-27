@@ -17,3 +17,14 @@
 - JWT 발급 및 Redis 기반 Refresh Token 관리
 - gateway service를 통해 /auth-service/login형식으로 연결처리
   - localhost/auth-service/login
+
+```shell
+docker build -t koboolean/moti-eureka-server .
+
+docker network create moti
+
+cd docker
+
+docker compose up -d
+```
+

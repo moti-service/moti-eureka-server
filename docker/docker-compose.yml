@@ -1,0 +1,42 @@
+services:
+  eureka-server:
+    image: koboolean/moti-eureka-server
+    container_name: moti-eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - moti
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+    restart: always
+
+  config-server:
+    image: koboolean/moti-config-server
+    container_name: moti-config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - moti
+    depends_on:
+      - eureka-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+    restart: always
+
+  gateway-service:
+    image: koboolean/moti-gateway-service
+    container_name: moti-gateway-service
+    ports:
+      - "80:80"
+    networks:
+      - moti
+    depends_on:
+      - eureka-server
+      - config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+    restart: always
+
+networks:
+  moti:
+    driver: bridge
