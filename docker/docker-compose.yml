@@ -23,6 +23,19 @@ services:
       - SPRING_PROFILES_ACTIVE=default
     restart: always
 
+  moti-db:
+    image: postgres:16.3
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: local_moti_postgres_db
+      POSTGRES_DB: moti
+      POSTGRES_USER: moti
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./volume/db:/var/lib/postgresql/data
+    container_name: moti-db
+
   gateway-service:
     image: koboolean/moti-gateway-service
     container_name: moti-gateway-service
