@@ -34,6 +34,8 @@ services:
       - "5432:5432"
     volumes:
       - ./volume/db:/var/lib/postgresql/data
+    networks:
+      - moti
     container_name: moti-db
 
   gateway-service:
@@ -41,6 +43,20 @@ services:
     container_name: moti-gateway-service
     ports:
       - "80:80"
+    networks:
+      - moti
+    depends_on:
+      - eureka-server
+      - config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+    restart: always
+
+  auth-service:
+    image: koboolean/moti-auth-service
+    container_name: moti-auth-service
+    ports:
+      - "8080:8080"
     networks:
       - moti
     depends_on:
