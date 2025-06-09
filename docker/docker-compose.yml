@@ -64,6 +64,13 @@ services:
       - config-server
     environment:
       - SPRING_PROFILES_ACTIVE=default
+      # IOS
+      #- OAUTH2_GOOGLE_REDIRECT_URI=http://localhost:8080/login/oauth2/code/google
+      #- OAUTH2_KAKAO_REDIRECT_URI=http://localhost:8080/login/oauth2/code/kakao
+      #- OAUTH2_NAVER_REDIRECT_URI=http://localhost:8080/login/oauth2/code/naver
+      #- OAUTH2_GOOGLE_REDIRECT_URI=https://e8cc-211-109-199-106.ngrok-free.app/auth-service/login/oauth2/code/google
+      #- OAUTH2_KAKAO_REDIRECT_URI=https://e8cc-211-109-199-106.ngrok-free.app/auth-service/login/oauth2/code/kakao
+      #- OAUTH2_NAVER_REDIRECT_URI=https://e8cc-211-109-199-106.ngrok-free.app/auth-service/login/oauth2/code/naver
     restart: always
 
 networks:
